@@ -1,2 +1,42 @@
 import camion.*
 import cosas.*
+/*
+  	Hay que hacer un pequeño test para cada una de las siguientes cosas: 
+  	paquete de ladrillos, batería antiaérea, contenedor portuario y embalaje de seguridad. 
+  	Al embalaje ponerle adentro los residuos radioactivos con 30 kg de peso. Al contenedor, 
+  	dos o tres cosas a elección. Todo esto en un archivo cosasTest.wtest.
+*/
+ 
+ 
+ describe "Cosas"{
+ 	
+ 	test "Paquete de ladrilos"{
+ 		paqueteLadrillos.cantLadrillos(4)
+ 		assert.equals(8, paqueteLadrillos.peso())
+ 		assert.equals(2, paqueteLadrillos.peligrosidad())
+ 	}
+ 	
+ 	
+ 	test "Batería antiaérea"{
+ 		bateriaAntiarea.hayMisiles(true)
+ 		assert.equals(100,bateriaAntiarea.peligrosidad())
+ 		assert.equals(300,bateriaAntiarea.peso())
+ 		assert.that(bateriaAntiarea.hayMisiles())
+ 	}
+ 	
+ 	
+ 	test "Contenedor portuario"{
+ 		bumblebee.esAuto(true)
+ 		contenedor.cosasDentro(knightRider)
+ 		contenedor.cosasDentro(bumblebee)
+ 		assert.equals(1400, contenedor.peso())
+ 		assert.equals(15, contenedor.peligrosidad())
+ 	}
+ 	
+ 	test "Embalaje de seguridad"{
+ 		residuosRadioactivos.peso(30)
+ 		embalajeSeguridad.cosaEnvuelta(residuosRadioactivos)
+ 		assert.equals(30, embalajeSeguridad.peso())
+ 		assert.equals(100, embalajeSeguridad.peligrosidad())
+ 	}
+ }

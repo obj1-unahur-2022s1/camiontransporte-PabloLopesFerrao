@@ -1,3 +1,31 @@
 import camion.*
 import cosas.*
 
+/*
+  	Por otro lado, armar un test del camión, cargado con lo siguiente: bumblebee como robot, 
+ 	la arena a granel con 150 kilos, la batería antiaérea con los misiles puestos, y el 
+ 	embalaje de seguridad poniéndole como contenido el paquete de ladrillos con 80 ladrillos.
+	Para cada método, calcular qué resultado tiene que dar, y hacer el test correspondiente.
+	Esto va en camionTest.wtest.
+ 
+ */
+ 
+ 
+ test "camion"{
+ 	bumblebee.esAuto(false)
+ 	arena.peso(150)
+ 	bateriaAntiarea.hayMisiles(true)
+ 	paqueteLadrillos.cantLadrillos(80)
+ 	embalajeSeguridad.cosaEnvuelta(paqueteLadrillos)
+ 	
+ 	camion.cargar(bumblebee)
+ 	camion.cargar(arena)
+ 	camion.cargar(bateriaAntiarea)
+ 	camion.cargar(embalajeSeguridad)
+ 	//assert.equals(300, camion.hayAlgunoQuePesa(300))
+ 	//assert.equals(100, camion.elDeNivel(100))
+ 	assert.equals(2410, camion.pesoTotal())
+ 	assert.that(not(camion.excedidoDePeso()))
+ 	assert.that(not(camion.tieneAlgoQuePesaEntre(10, 5000)))
+ 	
+ }
