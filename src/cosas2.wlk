@@ -1,5 +1,10 @@
+/*
+ * cosas2: Bien. 
+ * Faltan los test de camion2 y cosas2
+ */
+
 object knightRider {
-	
+	/* Bien! */
 	method peso() = 500
 	method peligrosidad() = 10
 	method bulto() = 1
@@ -10,15 +15,15 @@ object knightRider {
 
 
 object bumblebee {
-	var property esAuto 
+	/* Bien. Te convendría inicializar la variable booleana esAuto para que siempre
+	 * funcionen los métodos bulto() y sufrirConsecuencia(). Acomodo un poco el código para que sea
+	 * más legible.
+	 */
+	var property esAuto = true
 	
 	method peso() = 800
 	
-	method peligrosidad() = if (esAuto){
-		15
-	}else{
-		30
-	}
+	method peligrosidad() = if (esAuto) {15} else {30}
 	method bulto() = 2
 	method sufrirConsecuencia() {esAuto = false} 
 
@@ -26,18 +31,16 @@ object bumblebee {
 
 
 object paqueteLadrillos{
+	/* Bien. Te convenía inicializar cantLadrillos por si hay un paquete sin ladrillos. El condicional
+	 * en el método bulto() tal vez debía considerar cantLadrillos <= 100 directamente para retornar 1. 
+	 * Te dejo otra solución que no usa if. 
+	 */
 	var property cantLadrillos 
 	
 	method peso() = cantLadrillos *2
 	method peligrosidad() = 2
 	
-	method bulto() = if(cantLadrillos >= 1 and cantLadrillos <= 100 ){
-		return 1
-	}else if(cantLadrillos <= 300){
-		return 2
-	}else{
-		return 3
-	}
+	method bulto() = (2.min(1.max(cantLadrillos-99))).max(3.min(cantLadrillos-298))
 	method sufrirConsecuencia() {cantLadrillos += 12}
 
 
@@ -46,7 +49,10 @@ object paqueteLadrillos{
 
 
 object arena {
-	var property peso 
+	/* Bien. Convenía inicializar peso, y al definir la variable como var property, es innecesario
+	 * escribir el método peso(). 
+	 */
+	var property peso = 0
 
 	method peso() = peso
 	method peligrosidad() = 1
@@ -56,45 +62,42 @@ object arena {
 
 
 object bateriaAntiarea {
-	var property hayMisiles 
+	/* Bien(-). Convenía inicializar la variable booleana hayMisiles.
+	 * El método bulto() devolvía al revés los valores, te lo corrijo
+	 */
 	
-	method peso() = if(hayMisiles){
-		  300
-	}else{
-		   200
-	}
+	var property hayMisiles = false
 	
-	method peligrosidad() = if(hayMisiles){
-		   100
-	}else{
-		  0
-	}
+	method peso() = if(hayMisiles) 300 else 200
 	
-	method bulto() = if(hayMisiles){
-		return 1
-	}else{
-		return 2
-	}
+	method peligrosidad() = if(hayMisiles) 100 else 0
+	
+	method bulto() = if(hayMisiles) {2} else {1}
 	
 	method sufrirConsecuencia() {hayMisiles = true}
 }
 
 
 object contenedor {
-	var cosasDentro = []
+	/* Bien. cosasDentro podría haber sido una constante, ya que el enunciado no propone ninguna
+	 * situación en la que la variable que apunta a la lista pueda apuntar a otra lista o referencia.
+	 * Y solo como sugerencia, tal vez podrías haber hecho un método auxiliar
+	 * para obtener el objeto (cosa) más peligroso de la lista de cosas y luego usarlo en
+	 * nivelPeligrosidad(), y ahí queda más simplificada la expresión. Te dejo escrito
+	 * en el código.
+	 */
+	const cosasDentro = []
 	
-	method cosasDentro(cosas) = cosasDentro.add(cosas)
+	method cosasDentro(cosa) = cosasDentro.add(cosa)
 	
 	method cosasDentro() = cosasDentro
 	
 	method peso() = 100 + cosasDentro.sum({c => c.peso() })
 	
-	method peligrosidad() = if (cosasDentro.isEmpty()){
-		0
-	}else{
-		cosasDentro.max( { c => c.peligrosidad() } ).peligrosidad()
-
-	}
+	method peligrosidad() = if (cosasDentro.isEmpty()){0}
+							else{self.cosaMasPeligrosa().peligrosidad()}
+	
+	method cosaMasPeligrosa() = cosasDentro.max( { c => c.peligrosidad() } )
 	
 	method bulto() = 1 + cosasDentro.sum({c => c.bulto()})
 	
@@ -104,7 +107,8 @@ object contenedor {
 
 
 object residuosRadioactivos {
-	var property peso
+	/* Bien. Te dejo inicializada la variable */
+	var property peso = 0
 	
 	method peligrosidad() = 200
 	method bulto() = 1
@@ -114,11 +118,12 @@ object residuosRadioactivos {
 }
 
 object embalajeSeguridad {
+	/* Bien! */
 	var property cosaEnvuelta
 	
 	method peso() = cosaEnvuelta.peso()
 	
-	method peligrosidad() = (cosaEnvuelta.peligrosidad() / 2)
+	method peligrosidad() = cosaEnvuelta.peligrosidad() / 2
 	
 	method bulto() = 2
 	

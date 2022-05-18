@@ -1,3 +1,11 @@
+/*
+ * camionTest: Bien. Conviene separar los test, por los objetos que se están verificando y 
+ * por cada assert, ya que en otro caso es más dificil detectar errores. Se pueden agrupar
+ * en describe y dentro de los mismos usar variables y el método initialize() para definir
+ * el escenario de prueba, y luego de eso armar los test.
+ * Otra cosa es que no se debe enregar "código muerto" o líneas de código comentado, como 
+ * aparece en los 2 assert comentados.
+ */
 import camion.*
 import cosas.*
 
@@ -22,8 +30,8 @@ import cosas.*
  	camion.cargar(arena)
  	camion.cargar(bateriaAntiarea)
  	camion.cargar(embalajeSeguridad)
- 	//assert.equals(300, camion.hayAlgunoQuePesa(300))
- 	//assert.equals(100, camion.elDeNivel(100))
+ 	//assert.equals(300, camion.hayAlgunoQuePesa(300)) /* Esto hay que borrarlo */
+ 	//assert.equals(100, camion.elDeNivel(100))  /* Esto hay que borrarlo */
  	assert.equals(2410, camion.pesoTotal())
  	assert.that(not(camion.excedidoDePeso()))
  	assert.that(not(camion.tieneAlgoQuePesaEntre(10, 5000)))
